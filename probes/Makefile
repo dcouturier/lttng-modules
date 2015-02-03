@@ -9,6 +9,7 @@ ccflags-y += -I$(PWD)/probes
 obj-m += lttng-types.o
 
 obj-m += lttng-probe-sched.o
+obj-m += lttng-probe-i915.o
 obj-m += lttng-probe-irq.o
 obj-m += lttng-probe-timer.o
 obj-m += lttng-probe-kmem.o
