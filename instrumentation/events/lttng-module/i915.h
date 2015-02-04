@@ -6,6 +6,7 @@
 
 #include "../../../probes/lttng-tracepoint-event.h"
 
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,7,0))
 LTTNG_TRACEPOINT_EVENT(intel_gpu_freq_change,
 	
 	TP_PROTO(u32 freq),
@@ -22,6 +23,7 @@ LTTNG_TRACEPOINT_EVENT(intel_gpu_freq_change,
 
 	TP_printk("new_freq=%u",__entry->freq)
 )
+#endif
 
 #endif /* LTTNG_TRACE_I915_H */
 
