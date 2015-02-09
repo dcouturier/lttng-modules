@@ -29,7 +29,6 @@
  * Create the tracepoint static inlines from the kernel to validate that our
  * trace event macros match the kernel we run on.
  */
-//#include <trace/events/i915.h>
 
 #include "../wrapper/tracepoint.h"
 

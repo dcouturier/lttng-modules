@@ -9,7 +9,6 @@ ccflags-y += -I$(PWD)/probes
 obj-m += lttng-types.o
 
 obj-m += lttng-probe-sched.o
-obj-m += lttng-probe-i915.o
 obj-m += lttng-probe-irq.o
 obj-m += lttng-probe-timer.o
 obj-m += lttng-probe-kmem.o
@@ -17,6 +16,16 @@ obj-m += lttng-probe-module.o
 obj-m += lttng-probe-power.o
 
 obj-m += lttng-probe-statedump.o
+
+ifneq ($(CONFIG_DRM_I915),)
+i915_dep = $(srctree)/drivers/gpu/drm/i915/i915_drv.h
+ifneq ($(wildcard $(i915_dep)),) 
+CFLAGS_lttng-probe-i915.o += -I$(srctree)/drivers/gpu/drm/i915 -I$(srctree)/drivers/char/agp
+obj-m += lttng-probe-i915.o
+else
+$(warning File $(i915_dep) not found. Probe "i915" is disabled. Use full kernel source tree to enable it.)
+endif
+endif
 
 ifneq ($(CONFIG_KVM),)
 obj-m += lttng-probe-kvm.o
